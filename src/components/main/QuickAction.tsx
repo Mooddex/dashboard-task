@@ -1,5 +1,5 @@
 import { Users, Package, BarChart3, Activity } from "lucide-react";
-import ActionButton from "./_buttons/AddClientButton";
+import ActionButton from "../_buttons/ActionButton";
 
 const QuickActionSection = () => {
     return ( 
@@ -11,19 +11,19 @@ const QuickActionSection = () => {
           
           <ActionButton
           actionName="Add Client"
-          link="main/client/new"
+          link="dashboard/client/new"
           icon={Users}
           style="flex items-center gap-3 p-4 dark:bg-gray-800 rounded-lg bg-blue-50 text-blue-600 hover:scale-105 transition cursor-pointer"
            />
            <ActionButton
           actionName="Add Product"
-          link="main/product/new"
+          link="dashboard/product/new"
           icon={Package}
           style="flex items-center gap-3 p-4 dark:bg-gray-800 rounded-lg bg-green-50 text-green-600 hover:scale-105 transition cursor-pointer"
            />
           <ActionButton
           actionName="View Reports"
-          link="main/reports"
+          link="dashboard/reports"
           icon={BarChart3}
           style="flex items-center gap-3 p-4 dark:bg-gray-800 rounded-lg bg-purple-50 text-purple-600 hover:scale-105 transition cursor-pointer"
            />

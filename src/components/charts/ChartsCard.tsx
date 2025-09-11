@@ -2,7 +2,7 @@ import { BarChart3, Package, Activity, TrendingUp } from "lucide-react"
 import { ChartLineInteractive } from "./ChartLine"
 import { ChartTooltipDefault } from "./ChartTooltip"
 import { ChartPieLabel } from "./CircleChart"
-import SectionCard from "../main/_cards/SectionCard"
+import SectionCard from "../_cards/SectionCard"
 
 export const ChartsCard = () => {
 return(

@@ -1,6 +1,6 @@
 "use client";
 
-import { addProduct } from "@/app/main/product/action";
+import { addProduct } from "@/app/(main)/product/action";
 
 export default function AddProductForm() {
   return (

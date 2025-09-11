@@ -15,44 +15,44 @@ import { Home, Settings, ShoppingCart, Mail, ShoppingBasket, Bell, Info, Users }
     const items = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/dashboard",
     icon: Home,
   },
   {
     title: "Products",
-    url: "products",
+    url: "/dashboard/product",
     icon: ShoppingBasket,
   },
   {
     title: "Orders",
-    url: "orders",
+    url: "/dashboard/orders",
     icon: ShoppingCart,
   },
   
   {
     title: "Clients",
-    url: "clients",
+    url: "/dashboard/clients",
     icon: Users,
   },
 
   {
     title: "Messages",
-    url: "messages",
+    url: "/dashboard/messages",
     icon: Mail,
   },
   {
     title: "Settings",
-    url: "settings",
+    url: "/dashboard/settings",
     icon: Settings,
   },
     {
     title: "Notifications",
-    url: "notifications",
+    url: "/dashboard/notifications",
     icon: Bell,
   },
     {
     title: "Help",
-    url: "help",
+    url: "/dashboard/help",
     icon: Info,
   },
 

@@ -14,7 +14,7 @@ const NavBar = () => {
   return (
     <nav className="flex flex-wrap items-center justify-between px-4 sm:px-6 py-3 gap-2">
   {/* Left: Logo */}
-  <Link href="/" className="flex items-center gap-2 sm:gap-3">
+  <Link href="/dashboard" className="flex items-center gap-2 sm:gap-3">
     <span className="font-semibold text-base sm:text-lg">Dashboard</span>
   </Link>
 
