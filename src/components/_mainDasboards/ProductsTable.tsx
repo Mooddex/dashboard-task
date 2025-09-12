@@ -13,7 +13,7 @@ import { TotalStockCard } from "../_cards/TotalStockCard";
 import { TotalProductsCard } from "../_cards/TotalProducts";
 import ResponsiveCard from "../_cards/ResponsiveDTCard";
 import AddProductButton from "../_buttons/AddProductButton";
-import ViewReporetsButton from "../_buttons/ViewReporetsButton";
+import ViewReporetsButton from "../_buttons/ViewReportesButton";
 
 export default function ProductsTable() {
   const [data, setData] = useState<any[]>([]);
@@ -55,6 +55,12 @@ export default function ProductsTable() {
           <div className="">
             <TotalSalesCard />
           </div>
+        </div>
+        {/* Quick Actions Section */}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:justify-items-center">
+          <AddProductButton />
+          <ViewReporetsButton />
         </div>
 
         {/* Desktop Clients Table */}
@@ -100,12 +106,6 @@ export default function ProductsTable() {
               <DataTable data={data} columns={columns} />
             )}
           </ResponsiveCard>
-        </div>
-
-        {/* Quick Actions Section */}
-        <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          <AddProductButton/>
-          <ViewReporetsButton />
         </div>
       </div>
     </div>

@@ -81,14 +81,16 @@ export default function ClientsDashboard() {
         {/* Mobile responsive card with popup */}
         <div className="sm:hidden">
           <ResponsiveCard title="Clients Table">
-            {loading ? (
+            {loading ? 
+            (
               <p className="text-center text-gray-500">Loading...</p>
-            ) : (
+            ) : 
+            (
               <DataTable data={data} columns={columns} />
-            )}
+            )};
           </ResponsiveCard>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

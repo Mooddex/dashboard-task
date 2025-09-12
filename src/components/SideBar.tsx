@@ -31,15 +31,10 @@ import { Home, Settings, ShoppingCart, Mail, ShoppingBasket, Bell, Info, Users }
   
   {
     title: "Clients",
-    url: "/dashboard/clients",
+    url: "/dashboard/client",
     icon: Users,
   },
 
-  {
-    title: "Messages",
-    url: "/dashboard/messages",
-    icon: Mail,
-  },
   {
     title: "Settings",
     url: "/dashboard/settings",

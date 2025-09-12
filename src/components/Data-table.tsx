@@ -103,7 +103,7 @@ export function DataTable<TData, TValue>({
   );
 }
 
-// Optional: Export a variant with loading state
+// Export a variant with loading state
 export function DataTableWithLoading<TData, TValue>({
   columns,
   data,

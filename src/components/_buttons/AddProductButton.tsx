@@ -6,7 +6,7 @@ export default function AddProductButton() {
         <ActionButton
             actionName="Add Product"
             description="Create new product entry"
-            link="dashboard/product/new"
+            link="/dashboard/product/new"
             icon={Package}
             style="flex items-center gap-3 p-4 dark:bg-gray-800 rounded-lg bg-green-50 text-green-600 hover:scale-105 transition cursor-pointer"
           />
