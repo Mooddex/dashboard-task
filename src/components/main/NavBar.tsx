@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,

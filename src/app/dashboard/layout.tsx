@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import SideBar from "@/components/SideBar";
-import NavBar from "@/components/NavBar";
+import SideBar from "@/components/main/SideBar";
+import NavBar from "@/components/main/NavBar";
 import { ThemeProvider } from "next-themes";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +47,10 @@ export default function RootLayout({
                 </header>
 
                 <main className="">
-                  <div className="container mx-auto px-4 py-6">{children}</div>
+                  <div className="container mx-auto px-4 py-6">{children}
+                            <ToastContainer position="top-right" autoClose={3000} />
+
+                  </div>
                 </main>
 
               

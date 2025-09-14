@@ -1,4 +1,4 @@
-import DashboardHelpContent from "@/components/_mainDasboards/HelpDashboard";
+import DashboardHelpContent from "@/components/main/HelpDashboard";
 
 const HelpPage = () => {
     return ( 

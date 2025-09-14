@@ -1,5 +1,5 @@
 
-import { fetchProducts } from "@/lib/api"
+import { fetchProducts } from "@/app/actions/product"
 import { Warehouse } from "lucide-react"
 import { useEffect, useState } from "react"
 import DashboardCard from "./DashboardCard"
@@ -13,13 +13,13 @@ export const TotalStockCard = () => {
             .catch(console.error)
             .finally(() => setLoading(false))
         }, [])
-        const totalStock = data.reduce((sum, product) => sum + (Number(product.Stock) || 0), 0)
+        const totalStock = data.reduce((sum, product) => sum + (Number(product.stock) || 0), 0)
       
     return(
         <div>
              <DashboardCard
               title="Stock"
-              value={totalStock}
+              value={loading?"Calculating...":totalStock}
               icon={<Warehouse className="w-6 h-6" />}
             />
         </div>

@@ -23,11 +23,7 @@ import { Home, Settings, ShoppingCart, Mail, ShoppingBasket, Bell, Info, Users }
     url: "/dashboard/product",
     icon: ShoppingBasket,
   },
-  {
-    title: "Orders",
-    url: "/dashboard/orders",
-    icon: ShoppingCart,
-  },
+ 
   
   {
     title: "Clients",

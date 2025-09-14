@@ -1,4 +1,4 @@
-import ClientsDashboard from "@/components/_mainDasboards/ClientsDashboard";
+import ClientsDashboard from "@/components/_clients/ClientsDashboard";
 
 const clientsPage = () => {
   return ( 
@@ -6,6 +6,6 @@ const clientsPage = () => {
       <ClientsDashboard />
     </div>
    );
-}
+};
  
 export default clientsPage;

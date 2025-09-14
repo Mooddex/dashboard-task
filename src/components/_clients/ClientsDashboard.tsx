@@ -1,15 +1,19 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { DataTable } from "@/components/Data-table"
-import { columns } from "@/components/_columns/clients-columns"
-import { fetchClients } from "@/lib/api"
+import { DataTable } from "@/components/main/Data-table"
+import { columns } from "@/components/_clients/clients-columns"
+import { fetchClients } from "@/app/actions/client"
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import DashboardCard from "@/components/_cards/DashboardCard"
 import { Users, Mail, Phone } from "lucide-react"
 import { TotalClientsCard } from "../_cards/TotalClients"
 import ResponsiveCard from "../_cards/ResponsiveDTCard"
+import GmailClientsCard from "../_cards/GmailClientsCard"
+import TotalClientsCountriesCard from "../_cards/TotalClientsCountriesCard"
+import TotalCitiesCard from "../_cards/TotalCitiesCard"
+import AddClientButton from "../_buttons/AddClientButton"
+import ViewReportesButton from "../_buttons/ViewReportesButton"
 
 export default function ClientsDashboard() {
   const [data, setData] = useState<any[]>([])
@@ -22,9 +26,6 @@ export default function ClientsDashboard() {
       .finally(() => setLoading(false))
   }, [])
 
-  // ✅ Stats
-  const gmailClients = data.filter(client => client.email.includes("@gmail.com")).length
-  const totalCountries = data.filter(client => client.country).length
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
@@ -43,10 +44,16 @@ export default function ClientsDashboard() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <TotalClientsCard />
-          <DashboardCard title="With Gmail" value={gmailClients} icon={<Mail className="w-6 h-4" />} />
-          <DashboardCard title="Countries" value={totalCountries} icon={<Phone className="w-6 h-4" />} />
+          <GmailClientsCard />
+          <TotalClientsCountriesCard />
+          <TotalCitiesCard />
         </div>
+        {/* Quick Actions Section */}
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:justify-items-center">
+          <AddClientButton />
+          <ViewReportesButton />
+        </div>
         {/* Desktop Clients Table */}
         <div className="hidden sm:block">
           <Card className="w-full shadow-xl border-0 bg-white/80 backdrop-blur-sm dark:bg-gray-800/80">

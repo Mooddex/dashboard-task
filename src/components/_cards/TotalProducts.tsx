@@ -1,8 +1,8 @@
 "use client"
-import { fetchProducts } from "@/lib/api"
+import { fetchProducts } from "@/app/actions/product"
 import { Package } from "lucide-react"
 import { useEffect, useState } from "react"
-import DashboardCard from "./DashboardCard"
+import DashboardCard from "@/components/_cards/DashboardCard"
 
 export const TotalProductsCard = () => {
      const [data, setData] = useState<any[]>([])
@@ -19,7 +19,7 @@ export const TotalProductsCard = () => {
         <div>
              <DashboardCard
               title="Products"
-              value={totalProducts}
+              value={loading?"Calculating...":totalProducts}
               icon={<Package className="w-6 h-6" />}
             />
         </div>

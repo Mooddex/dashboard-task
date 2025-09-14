@@ -1,8 +1,8 @@
 "use client";
 
-import { DataTable } from "@/components/Data-table";
-import { columns } from "@/components/_columns/product-columns";
-import { fetchProducts } from "@/lib/api";
+import { DataTable } from "@/components/main/Data-table";
+import { columns } from "@/components/_products/product-columns";
+import { fetchProducts } from "@/app/actions/product";
 import { useState, useEffect } from "react";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -10,9 +10,9 @@ import { Package } from "lucide-react";
 import { TotalSalesCard } from "../_cards/TotalSalesCard";
 import { ProductCategoryCard } from "../_cards/ProductCategoriesCard";
 import { TotalStockCard } from "../_cards/TotalStockCard";
-import { TotalProductsCard } from "../_cards/TotalProducts";
+import { TotalProductsCard } from "@/components/_cards/TotalProducts";
 import ResponsiveCard from "../_cards/ResponsiveDTCard";
-import AddProductButton from "../_buttons/AddProductButton";
+import AddProductButton from "@/components/_buttons/AddProductButton";
 import ViewReporetsButton from "../_buttons/ViewReportesButton";
 
 export default function ProductsTable() {

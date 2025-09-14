@@ -1,6 +1,6 @@
 
 
-import { fetchProducts } from "@/lib/api"
+import { fetchProducts } from "@/app/actions/product"
 import { Grid3X3, TrendingUp } from "lucide-react"
 import { useEffect, useState } from "react"
 import DashboardCard from "./DashboardCard"
@@ -14,13 +14,13 @@ export const ProductCategoryCard = () => {
             .catch(console.error)
             .finally(() => setLoading(false))
         }, [])
-        const totalCategories = new Set(data.map(product => product.Category)).size
+        const totalCategories = new Set(data.map(product => product.category)).size
     
     return(
         <div>
              <DashboardCard
               title="Categories"
-              value={totalCategories}
+              value={loading?"Calculating...":totalCategories}
               icon={<Grid3X3 className="w-6 h-6" />}
             />
         </div>
