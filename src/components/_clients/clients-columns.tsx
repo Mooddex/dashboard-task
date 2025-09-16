@@ -10,9 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu"; // ✅ use shadcn wrapper
+} from "@/components/ui/dropdown-menu"; 
 import Link from "next/link";
 import { client } from "@/types/interfaces";
+import { handleDelete } from "@/app/actions/client";
 
 export const columns: ColumnDef<client>[] = [
   { accessorKey: "id", header: "ID" },
@@ -25,6 +26,15 @@ export const columns: ColumnDef<client>[] = [
     id: "actions",
     cell: ({ row }) => {
       const client = row.original;
+      const handleDeleteClick = async () => {
+        const confirmed = confirm(`Are you sure you want to delete "${client.username}"?`)
+        if (!confirmed) return
+
+        const success = await handleDelete(String(client.id))
+        if (success) {
+          window.location.reload()
+        };
+      };
 
       return (
         <DropdownMenu>
@@ -43,7 +53,9 @@ export const columns: ColumnDef<client>[] = [
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem className="text-red-600 flex items-center gap-2 cursor-pointer">
+            <DropdownMenuItem
+            onClick={handleDeleteClick}
+            className="text-red-600 flex items-center gap-2 cursor-pointer">
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

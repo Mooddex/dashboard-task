@@ -1,7 +1,9 @@
+import { ChartsCard } from "@/components/charts/ChartsCard";
+
 const ReportsPage = () => {
     return ( 
         <div>
-            r
+            <ChartsCard />
         </div>
      );
 }

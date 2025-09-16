@@ -33,17 +33,17 @@ import { Home, Settings, ShoppingCart, Mail, ShoppingBasket, Bell, Info, Users }
 
   {
     title: "Settings",
-    url: "/dashboard/settings",
+    url: "#",
     icon: Settings,
   },
     {
     title: "Notifications",
-    url: "/dashboard/notifications",
+    url: "#",
     icon: Bell,
   },
     {
     title: "Help",
-    url: "/dashboard/help",
+    url: "#",
     icon: Info,
   },
 

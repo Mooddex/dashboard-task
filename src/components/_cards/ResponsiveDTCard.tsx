@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import PaginationSetup from "../main/PaginationSetUp";
 
 interface ResponsiveCardProps {
   title: string;
@@ -27,14 +28,17 @@ const ResponsiveCard = ({ title, children }: ResponsiveCardProps) => {
             <CardContent>
               <p className="text-sm text-gray-500">Tap to view details</p>
             </CardContent>
+             
           </Card>
         </DialogTrigger>
 
         <DialogContent className="max-w-[90vw] max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
+            <PaginationSetup />
           </DialogHeader>
           <div>{children}</div>
+          
         </DialogContent>
       </Dialog>
     </div>

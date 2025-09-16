@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { product } from "@/types/interfaces";
+import { handleDeleteProduct } from "@/app/actions/product";
 
 export const columns: ColumnDef<product>[] = [
   { accessorKey: "id", header: "ID" },
@@ -32,6 +33,17 @@ export const columns: ColumnDef<product>[] = [
     id: "actions",
     cell: ({ row }) => {
       const product = row.original;
+      const handleDeleteClick = async () => {
+        const confirmed = confirm(
+          `Are you sure you want to delete "${product.name}"?`
+        );
+        if (!confirmed) return;
+
+        const success = await handleDeleteProduct(String(product.id));
+        if (success) {
+          window.location.reload();
+        }
+      };
 
       return (
         <DropdownMenu>
@@ -54,7 +66,7 @@ export const columns: ColumnDef<product>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="text-red-600 flex items-center gap-2 cursor-pointer"
-              onClick={() => console.log("Delete product", product.id)}
+              onClick={handleDeleteClick}
             >
               <Trash className="h-4 w-4" /> Delete
             </DropdownMenuItem>

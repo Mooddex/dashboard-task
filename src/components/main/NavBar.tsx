@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./ModeToggle";
+import LogoutButton from "../_buttons/LogOut";
 
 const NavBar = () => {
   return (
@@ -38,8 +39,8 @@ const NavBar = () => {
         <DropdownMenuItem className="cursor-pointer hover:bg-[#2a2a2a]">
           Billing
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer text-red-500 hover:bg-[#2a2a2a]">
-          Logout
+        <DropdownMenuItem>
+          <LogoutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

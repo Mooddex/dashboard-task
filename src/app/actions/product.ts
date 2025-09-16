@@ -1,5 +1,7 @@
 "use server"
 
+import { toast } from "react-toastify"
+
 //  Get all products
 export async function fetchProducts() {
   const res = await fetch("https://api.mockae.com/fakeapi/products")
@@ -64,10 +66,30 @@ export async function updateProductAction(id: string, formData: FormData) {
 
 
 //  Delete product
-export async function deleteProduct(id: string) {
+export async function handleDeleteProduct(id: string) {
+ try{ 
   const res = await fetch(`https://api.mockae.com/fakeapi/products/${id}`, {
     method: "DELETE",
   })
-  if (!res.ok) throw new Error("Failed to delete product")
-  return true
-}
+  if (!res.ok) {
+        toast.error(" Failed to delete product", {
+          position: "top-left",
+          autoClose: 3000,
+        });
+        return false;
+      }
+  
+      toast.success(" product deleted successfully", {
+        position: "top-left",
+        autoClose: 3000,
+      });
+      return true;
+    } catch (error) {
+      console.error("Delete error:", error);
+      toast.error(" Something went wrong", {
+        position: "top-left",
+        autoClose: 3000,
+      });
+      return false;
+    }
+  }

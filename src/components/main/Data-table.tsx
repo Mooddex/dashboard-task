@@ -5,28 +5,57 @@ import {
   getCoreRowModel,
   useReactTable,
   ColumnDef,
+    ColumnFiltersState,
+  getFilteredRowModel,
+
 } from "@tanstack/react-table";
+import { Input } from "@/components/ui/input"
+import React from "react";
+
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   className?: string;
+  placeHolder : string ;
+  ValueOfSelectedField : string;
 };
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   className = "",
+  placeHolder,
+  ValueOfSelectedField,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  )
   const table = useReactTable({
     data,
     columns,
+      onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
+    state :{
+       columnFilters,
+    }
   });
+
 
   return (
     <div className={`w-full ${className}`}>
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
+        <div className="flex items-center py-4">
+        <Input
+          placeholder={placeHolder}
+          value={(table.getColumn(ValueOfSelectedField)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn(ValueOfSelectedField)?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+      </div>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse min-w-[600px] sm:min-w-[800px]">
             <thead>
@@ -109,6 +138,8 @@ export function DataTableWithLoading<TData, TValue>({
   data,
   isLoading = false,
   className = "",
+  placeHolder,
+  ValueOfSelectedField,
 }: DataTableProps<TData, TValue> & { isLoading?: boolean }) {
   if (isLoading) {
     return (
@@ -146,5 +177,5 @@ export function DataTableWithLoading<TData, TValue>({
     );
   }
 
-  return <DataTable columns={columns} data={data} className={className} />;
+  return <DataTable columns={columns} data={data} className={className} placeHolder={placeHolder} ValueOfSelectedField={ValueOfSelectedField} />;
 }

@@ -1,5 +1,7 @@
 "use server"
 
+import { toast } from "react-toastify"
+
 //  Get all clients
 export async function fetchClients() {
   const res = await fetch("https://api.mockae.com/fakeapi/users")
@@ -54,11 +56,32 @@ export async function updateClientAction(id: string, formData: FormData) {
 };
 
 
-//  Delete client
-export async function deleteClient(id: string) {
-  const res = await fetch(`https://api.mockae.com/fakeapi/users/${id}`, {
-    method: "DELETE",
-  })
-  if (!res.ok) throw new Error("Failed to delete client")
-  return true
-};
+// Delete client
+export async function handleDelete(id: string) {
+  try {
+    const res = await fetch(`https://api.mockae.com/fakeapi/users/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      toast.error(" Failed to delete client", {
+        position: "top-left",
+        autoClose: 3000,
+      });
+      return false;
+    }
+
+    toast.success(" Client deleted successfully", {
+      position: "top-left",
+      autoClose: 3000,
+    });
+    return true;
+  } catch (error) {
+    console.error("Delete error:", error);
+    toast.error(" Something went wrong", {
+      position: "top-left",
+      autoClose: 3000,
+    });
+    return false;
+  }
+}

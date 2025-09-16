@@ -14,6 +14,8 @@ import TotalClientsCountriesCard from "../_cards/TotalClientsCountriesCard"
 import TotalCitiesCard from "../_cards/TotalCitiesCard"
 import AddClientButton from "../_buttons/AddClientButton"
 import ViewReportesButton from "../_buttons/ViewReportesButton"
+import { Pagination } from "../ui/pagination"
+import PaginationSetup from "../main/PaginationSetUp"
 
 export default function ClientsDashboard() {
   const [data, setData] = useState<any[]>([])
@@ -80,8 +82,10 @@ export default function ClientsDashboard() {
                 <p className="text-center text-gray-500">Loading...</p>
               ) : (
                 <DataTable columns={columns} data={data} />
+              
               )}
             </CardContent>
+             <PaginationSetup />
           </Card>
         </div>
 
@@ -91,10 +95,10 @@ export default function ClientsDashboard() {
             {loading ? 
             (
               <p className="text-center text-gray-500">Loading...</p>
-            ) : 
+            ): 
             (
               <DataTable data={data} columns={columns} />
-            )};
+            )}
           </ResponsiveCard>
         </div>
       </div>

@@ -14,6 +14,7 @@ import { TotalProductsCard } from "@/components/_cards/TotalProducts";
 import ResponsiveCard from "../_cards/ResponsiveDTCard";
 import AddProductButton from "@/components/_buttons/AddProductButton";
 import ViewReporetsButton from "../_buttons/ViewReportesButton";
+import PaginationSetup from "../main/PaginationSetUp";
 
 export default function ProductsTable() {
   const [data, setData] = useState<any[]>([]);
@@ -95,6 +96,7 @@ export default function ProductsTable() {
                 <DataTable columns={columns} data={data} />
               )}
             </CardContent>
+             <PaginationSetup />
           </Card>
         </div>
         {/* Mobile responsive card with popup */}
