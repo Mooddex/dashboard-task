@@ -1,38 +1,36 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { DataTable } from "@/components/main/Data-table"
-import { columns } from "@/components/_clients/clients-columns"
-import { fetchClients } from "@/app/actions/client"
+import { useState, useEffect } from "react";
+import { DataTable } from "@/components/main/Data-table";
+import { columns } from "@/components/_clients/clients-columns";
+import { fetchClients } from "@/app/actions/client";
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Users } from "lucide-react"
-import { TotalClientsCard } from "../_cards/TotalClients"
-import ResponsiveCard from "../_cards/ResponsiveDTCard"
-import GmailClientsCard from "../_cards/GmailClientsCard"
-import TotalClientsCountriesCard from "../_cards/TotalClientsCountriesCard"
-import TotalCitiesCard from "../_cards/TotalCitiesCard"
-import AddClientButton from "../_buttons/AddClientButton"
-import ViewReportesButton from "../_buttons/ViewReportesButton"
-import PaginationSetup from "../main/PaginationSetUp"
-import { client } from "@/types/interfaces"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Users } from "lucide-react";
+import { TotalClientsCard } from "../_cards/TotalClients";
+import ResponsiveCard from "../_cards/ResponsiveDTCard";
+import GmailClientsCard from "../_cards/GmailClientsCard";
+import TotalClientsCountriesCard from "../_cards/TotalClientsCountriesCard";
+import TotalCitiesCard from "../_cards/TotalCitiesCard";
+import ViewReportesButton from "../_buttons/ViewReportesButton";
+import PaginationSetup from "../main/PaginationSetUp";
+import { client } from "@/types/interfaces";
+import ActionButton from "../_buttons/ActionButton";
 
 export default function ClientsDashboard() {
-  const [data, setData] = useState<client[]>([])
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState<client[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchClients()
       .then(setData)
       .catch(console.error)
-      .finally(() => setLoading(false))
-  }, [])
-
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4 py-8 space-y-8">
-        
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
@@ -53,7 +51,12 @@ export default function ClientsDashboard() {
         {/* Quick Actions Section */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:justify-items-center">
-          <AddClientButton />
+          <ActionButton
+            actionName="Add Client"
+            link="client/new"
+            icon={Users}
+            style="flex items-center gap-3 p-4 dark:bg-gray-800 rounded-lg bg-blue-50 text-blue-600 hover:scale-105 transition cursor-pointer"
+          />
           <ViewReportesButton />
         </div>
         {/* Desktop Clients Table */}
@@ -64,8 +67,12 @@ export default function ClientsDashboard() {
                 <div className="flex items-center space-x-3">
                   <Users className="w-8 h-8" />
                   <div>
-                    <CardTitle className="text-2xl font-bold">Clients Management</CardTitle>
-                    <p className="text-blue-100 mt-1">Complete list of all clients in your system</p>
+                    <CardTitle className="text-2xl font-bold">
+                      Clients Management
+                    </CardTitle>
+                    <p className="text-blue-100 mt-1">
+                      Complete list of all clients in your system
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -81,29 +88,34 @@ export default function ClientsDashboard() {
               {loading ? (
                 <p className="text-center text-gray-500">Loading...</p>
               ) : (
-                <DataTable columns={columns} data={data}
-                placeHolder={"Search Client List By Email ...."} ValueOfSelectedField={"email"} 
+                <DataTable
+                  columns={columns}
+                  data={data}
+                  placeHolder={"Search Client List By Email ...."}
+                  ValueOfSelectedField={"email"}
                 />
-              
               )}
             </CardContent>
-             <PaginationSetup />
+            <PaginationSetup />
           </Card>
         </div>
 
         {/* Mobile responsive card with popup */}
         <div className="sm:hidden">
           <ResponsiveCard title="Clients Table">
-            {loading ? 
-            (
+            {loading ? (
               <p className="text-center text-gray-500">Loading...</p>
-            ): 
-            (
-              <DataTable data={data} columns={columns} placeHolder={"Search Client List By Email ...."} ValueOfSelectedField={"email"} />
+            ) : (
+              <DataTable
+                data={data}
+                columns={columns}
+                placeHolder={"Search Client List By Email ...."}
+                ValueOfSelectedField={"email"}
+              />
             )}
           </ResponsiveCard>
         </div>
       </div>
     </div>
   );
-};
+}
