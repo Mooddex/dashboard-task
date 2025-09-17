@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { product } from "@/types/interfaces";
 import { handleDeleteProduct } from "@/app/actions/product";
+import { toast } from "react-toastify";
 
 export const columns: ColumnDef<product>[] = [
   { accessorKey: "id", header: "ID" },
@@ -33,16 +34,49 @@ export const columns: ColumnDef<product>[] = [
     id: "actions",
     cell: ({ row }) => {
       const product = row.original;
-      const handleDeleteClick = async () => {
-        const confirmed = confirm(
-          `Are you sure you want to delete "${product.name}"?`
-        );
-        if (!confirmed) return;
 
-        const success = await handleDeleteProduct(String(product.id));
-        if (success) {
-          window.location.reload();
-        }
+      const handleDeleteClick = () => {
+        toast.info(
+          ({ closeToast }) => (
+            <div>
+              <p>
+                Are you sure you want to delete{" "}
+                <span className="font-semibold">`{product.name}`</span>?
+              </p>
+              <div className="flex gap-2 mt-2">
+                <button
+                  onClick={async () => {
+                    const success = await handleDeleteProduct(
+                      String(product.id)
+                    );
+
+                    if (success) {
+                      toast.success("Product deleted successfully ", {
+                        autoClose: 3000,
+                      });
+                    } else {
+                      toast.error("Failed to delete product ", {
+                        autoClose: 3000,
+                      });
+                    }
+
+                    closeToast?.();
+                  }}
+                  className="bg-red-500 text-white px-2 py-1 rounded"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={closeToast}
+                  className="bg-gray-300 text-black px-2 py-1 rounded"
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          ),
+          { autoClose: false }
+        );
       };
 
       return (
@@ -53,7 +87,7 @@ export const columns: ColumnDef<product>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          
+
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <Link href={`product/edit/${product.id}`}>
