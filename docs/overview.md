@@ -58,11 +58,47 @@ This is the foundation for larger platform modules.
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 API Endpoints & Actions
 
-* `/api/auth` – Authentication
-* `/api/clients` – Clients data
-* `/api/products` – Products data
+### Auth
+* `POST /api/auth/register` – Create a new user account  
+* `POST /api/auth/login` – Log in with credentials  
+* `POST /api/auth/logout` – Log out the current session  
+
+**Actions**  
+- `signUpAction(data)` → Registers a new user  
+- `signInAction(data)` → Logs in with credentials  
+- `signOutAction()` → Logs out the current user  
+
+---
+
+### Clients
+* `GET /api/clients` – Get all clients  
+* `GET /api/clients/:id` – Get a specific client by ID  
+* `POST /api/clients` – Add a new client  
+* `PUT /api/clients/:id` – Update a client’s details  
+* `DELETE /api/clients/:id` – Remove a client  
+
+**Actions**  
+- `fetchClients()` → Fetches all clients from the API  
+- `addClientAction(data)` → Adds a new client  
+- `updateClientAction(id, data)` → Updates client info  
+- `deleteClientAction(id)` → Deletes a client  
+
+---
+
+### Products
+* `GET /api/products` – Get all products  
+* `GET /api/products/:id` – Get a specific product by ID  
+* `POST /api/products` – Add a new product  
+* `PUT /api/products/:id` – Update a product’s details  
+* `DELETE /api/products/:id` – Remove a product  
+
+**Actions**  
+- `fetchProducts()` → Fetches all products  
+- `addProductAction(data)` → Adds a new product  
+- `updateProductAction(id, data)` → Updates product details  
+- `deleteProductAction(id)` → Deletes a product  
 
 ---
 
