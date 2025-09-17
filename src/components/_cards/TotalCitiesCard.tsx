@@ -5,9 +5,10 @@ import { fetchClients } from "@/app/actions/client"
 import { useState, useEffect } from "react"
 import DashboardCard from "./DashboardCard"
 import { TowerControl } from "lucide-react"
+import { client } from "@/types/interfaces"
 
 export default function TotalCitiesCard() {
-    const [data, setData] = useState<any[]>([])
+    const [data, setData] = useState<client[]>([])
       const [loading, setLoading] = useState(true)
     
      useEffect(() => {

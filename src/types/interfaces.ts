@@ -9,7 +9,7 @@ export interface product {
     count:number
   }
 };
-export type client = {
+export interface client{
   id: number
   username: string
   email: string

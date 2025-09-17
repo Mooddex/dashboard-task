@@ -46,7 +46,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className={`w-full ${className}`}>
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 ml-5">
         <Input
           placeholder={placeHolder}
           value={(table.getColumn(ValueOfSelectedField)?.getFilterValue() as string) ?? ""}

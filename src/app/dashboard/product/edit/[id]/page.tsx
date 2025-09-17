@@ -1,18 +1,20 @@
 import EditProductForm from "@/components/_products/EditProductForm";
-import {  fetchProductById } from "@/app/actions/product";
+import { fetchProductById } from "@/app/actions/product";
 
 interface EditingProductProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
-export default async function EditingProductPage({ params }: EditingProductProps) {
-  const product = await fetchProductById(params.id);
+export default async function EditingProductPage({
+  params,
+}: EditingProductProps) {
+  const { id } = await params;
 
- if (!product) {
-    return <div className="p-6">Product not found</div>
-  };
+  const product = await fetchProductById(id);
+
+  if (!product) {
+    return <div className="p-6">Product not found</div>;
+  }
 
   return (
     <div className="max-w-xl mx-auto p-6">
@@ -20,4 +22,4 @@ export default async function EditingProductPage({ params }: EditingProductProps
       <EditProductForm product={product} />
     </div>
   );
-};
+}

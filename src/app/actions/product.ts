@@ -1,5 +1,6 @@
 "use server"
 
+import { TAddProductSchema, TEditProductSchema } from "@/lib/validators"
 import { toast } from "react-toastify"
 
 //  Get all products
@@ -18,17 +19,8 @@ export async function fetchProductById(id: string) {
 
 
 // Add product
-export async function addProductAction(formData: FormData) {
-  const newProduct = {
-    name: formData.get("name"),
-    category: formData.get("category"),
-    price: Number(formData.get("price")),
-    stock: Number(formData.get("stock")),
-    rating: {
-      rate: Number(formData.get("rate")),
-      count: Number(formData.get("count")),
-    },
-  }
+export async function addProductAction(newProduct:TAddProductSchema) {
+
 
   const res = await fetch("https://api.mockae.com/fakeapi/products", {
     method: "POST",
@@ -36,31 +28,35 @@ export async function addProductAction(formData: FormData) {
     body: JSON.stringify(newProduct),
   })
 
-  if (!res.ok) throw new Error("Failed to add product")
-  return res.json()
+  if (!res.ok) {
+    return { success: false, message: "Failed to create Product" }
+  }
+
+  const data = await res.json()
+  return { success: true, data }
 }
 
 // Update product
-export async function updateProductAction(id: string, formData: FormData) {
-  const updatedProduct = {
-    name: formData.get("name"),
-    category: formData.get("category"),
-    price: Number(formData.get("price")), 
-    stock: Number(formData.get("stock")),
-    rating: {
-      rate: Number(formData.get("rate")),
-      count: Number(formData.get("count")),
-    },
-  }
-
+export async function updateProductAction(id: string, updatedProduct:TEditProductSchema){
+ 
+  try{
   const res = await fetch(`https://api.mockae.com/fakeapi/products/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updatedProduct),
   })
 
-  if (!res.ok) throw new Error("Failed to update product")
-  return res.json()
+  if (!res.ok) {
+    return { success: false, message: "Failed to update product" }
+  }
+
+  const data = await res.json()
+  return { success: true, data }
+} catch (error){
+console.error("Update product error:", error)
+    return { success: false, message: "Network error occurred", error }
+ 
+}
 }
 
 

@@ -3,9 +3,10 @@ import { fetchProducts } from "@/app/actions/product"
 import { Warehouse } from "lucide-react"
 import { useEffect, useState } from "react"
 import DashboardCard from "./DashboardCard"
+import { product } from "@/types/interfaces"
 
 export const TotalStockCard = () => {
-     const [data, setData] = useState<any[]>([])
+     const [data, setData] = useState<product[]>([])
         const [loading, setLoading] = useState(true)
         useEffect(() => {
             fetchProducts()

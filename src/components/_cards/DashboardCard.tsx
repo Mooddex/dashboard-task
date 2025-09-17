@@ -8,7 +8,7 @@ import { ReactElement, ReactNode } from "react";
 
 interface DasboardCardProps {
   title: string;
-  value: any| string | number;
+  value:  string | number;
   icon: ReactElement<LucideIcon>;
   trend?: string; // Optional trend text like "+12% from last month"
   trendUp?: boolean; // Optional trend direction

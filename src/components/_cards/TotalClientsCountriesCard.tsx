@@ -3,9 +3,10 @@ import { fetchClients } from "@/app/actions/client";
 import { useEffect, useState } from "react";
 import DashboardCard from "./DashboardCard";
 import { Phone } from "lucide-react";
+import { client } from "@/types/interfaces";
 
 export default function TotalClientsCountriesCard() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<client[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

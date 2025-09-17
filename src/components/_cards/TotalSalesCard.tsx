@@ -2,9 +2,10 @@ import { TrendingUp } from "lucide-react";
 import DashboardCard from "./DashboardCard";
 import { fetchProducts } from "@/app/actions/product";
 import { useEffect, useState } from "react";
+import { product } from "@/types/interfaces";
 
 export const TotalSalesCard = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<product[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchProducts()

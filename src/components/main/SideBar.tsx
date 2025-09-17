@@ -1,16 +1,14 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Home, Settings, ShoppingCart, Mail, ShoppingBasket, Bell, Info, Users } from "lucide-react";
+import { Home, Settings, ShoppingBasket, Bell, Info, Users } from "lucide-react";
 
     const items = [
   {

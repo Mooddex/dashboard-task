@@ -91,21 +91,15 @@ src/
 2. **Install dependencies**
 
    ```bash
-   pnpm install
-   # or
    npm install
-   # or
-   yarn install
    ```
 
 1.**Run the development server**
 
 ```bash
-pnpm dev
-# or
+
 npm run dev
-# or
-yarn dev
+
 ```
 
 1. **Open your browser**
@@ -141,8 +135,8 @@ yarn dev
 
 - **JSONPlaceholder**: Primary data source for users/clients
 
-  - Users: `https://jsonplaceholder.typicode.com/users`
-  - Posts: `https://jsonplaceholder.typicode.com/posts`
+  - Users: `https://api.mockae.com/fakeapi/users`
+  - Products: `https://api.mockae.com/fakeapi/products`
 
 ### Internal API Routes
 
@@ -151,7 +145,7 @@ yarn dev
 
 ### Data Management
 
-- **Clients**: Fetched from JSONPlaceholder users API with local storage enhancement
+- **Clients**: Fetched from mockae users API 
 - **Products**: Mock data with local state management
 - **Real-time Updates**: Optimistic UI with error handling
 

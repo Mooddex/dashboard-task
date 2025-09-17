@@ -10,10 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu"; 
+} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { client } from "@/types/interfaces";
-import { handleDelete } from "@/app/actions/client";
+import { deleteClientAction } from "@/app/actions/client";
 
 export const columns: ColumnDef<client>[] = [
   { accessorKey: "id", header: "ID" },
@@ -27,13 +27,15 @@ export const columns: ColumnDef<client>[] = [
     cell: ({ row }) => {
       const client = row.original;
       const handleDeleteClick = async () => {
-        const confirmed = confirm(`Are you sure you want to delete "${client.username}"?`)
-        if (!confirmed) return
+        const confirmed = confirm(
+          `Are you sure you want to delete "${client.username}"?`
+        );
+        if (!confirmed) return;
 
-        const success = await handleDelete(String(client.id))
+        const success = await deleteClientAction(String(client.id));
         if (success) {
-          window.location.reload()
-        };
+          window.location.reload();
+        }
       };
 
       return (
@@ -47,15 +49,15 @@ export const columns: ColumnDef<client>[] = [
 
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <Link href={`client/edit/${client.id}`}>Edit</Link>
-            </DropdownMenuItem>
-
+            <Link href={`client/edit/${client.id}`}>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
-            onClick={handleDeleteClick}
-            className="text-red-600 flex items-center gap-2 cursor-pointer">
+              onClick={handleDeleteClick}
+              className="text-red-600 flex items-center gap-2 cursor-pointer"
+            >
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

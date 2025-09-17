@@ -1,4 +1,3 @@
-import { ChartLine } from "lucide-react";
 import QuickActionSection from "./QuickAction";
 import { ChartsCard } from "../charts/ChartsCard";
 

@@ -53,16 +53,14 @@ export const columns: ColumnDef<product>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
+          
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem asChild>
-              <Link
-                href={`product/edit/${product.id}`}
-                className="flex items-center gap-2"
-              >
+            <Link href={`product/edit/${product.id}`}>
+              <DropdownMenuItem className="flex items-center gap-2">
                 <Pencil className="h-4 w-4" /> Edit
-              </Link>
-            </DropdownMenuItem>
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="text-red-600 flex items-center gap-2 cursor-pointer"

@@ -1,31 +1,40 @@
 "use client";
 
-import { TAddClientSchema, AddClientSchema } from "@/lib/validators";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
-import { useForm } from "react-hook-form";
-
+import { TEditClientSchema, EditClientSchema } from "@/lib/validators";
 import { toast } from "react-toastify";
-import { addClientAction } from "@/app/actions/client";
+import { updateClientAction } from "@/app/actions/client";
+import { client } from "@/types/interfaces";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
-export default function AddClientForm() {
+export default function EditClientForm({ client }: { client: client }) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<TAddClientSchema>({
-    resolver: zodResolver(AddClientSchema),
+  } = useForm<TEditClientSchema>({
+    resolver: zodResolver(EditClientSchema),
+    defaultValues: client,
   });
 
- const onSubmit = async (data: TAddClientSchema) => {
-  try {
-    await addClientAction(data);
-    toast.success("Client added successfully!");
-  } catch (err) {
-    console.log(err)
-    toast.error("Something went wrong while adding client");
-  }
-};
+  const onSubmit = async (data: TEditClientSchema) => {
+    const res = await updateClientAction(String(client.id), data);
+
+    if (res.success) {
+      toast.success("Client updated successfully!",
+        {
+          autoClose: 500,
+          onClose: () => {
+            router.push("/dashboard/client");
+          },
+        })
+    } else {
+      console.error(res.error);
+      toast.error(res.message || "Something went wrong while updating client");
+    }
+  };
 
   return (
     <form
@@ -36,7 +45,6 @@ export default function AddClientForm() {
         <label className="block text-sm">Name</label>
         <input
           {...register("username")}
-          placeholder="Name"
           className="border p-2 w-full rounded"
         />
         {errors.username && (
@@ -47,23 +55,18 @@ export default function AddClientForm() {
       <div>
         <label className="block text-sm">Email</label>
         <input
-         {...register("email")}
+          {...register("email")}
           type="email"
-          placeholder="Email"
           className="border p-2 w-full rounded"
         />
-         {errors.email && (
+        {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
       </div>
 
       <div>
         <label className="block text-sm">Phone</label>
-        <input
-         {...register("phone")}
-          placeholder="Phone Number"
-          className="border p-2 w-full rounded"
-        />
+        <input {...register("phone")} className="border p-2 w-full rounded" />
         {errors.phone && (
           <p className="text-red-500 text-sm">{errors.phone.message}</p>
         )}
@@ -71,12 +74,7 @@ export default function AddClientForm() {
 
       <div>
         <label className="block text-sm">Country</label>
-        <input
-         {...register("country")}
-          name="country"
-          placeholder="Country"
-          className="border p-2 w-full rounded"
-        />
+        <input {...register("country")} className="border p-2 w-full rounded" />
         {errors.country && (
           <p className="text-red-500 text-sm">{errors.country.message}</p>
         )}
@@ -84,12 +82,8 @@ export default function AddClientForm() {
 
       <div>
         <label className="block text-sm">City</label>
-        <input
-         {...register("city")}
-          placeholder="City"
-          className="border p-2 w-full rounded"
-        />
-         {errors.city && (
+        <input {...register("city")} className="border p-2 w-full rounded" />
+        {errors.city && (
           <p className="text-red-500 text-sm">{errors.city.message}</p>
         )}
       </div>
@@ -97,9 +91,9 @@ export default function AddClientForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
       >
-        {isSubmitting ? "Saving..." : "Add Client"}
+        {isSubmitting ? "Saving..." : "Save Changes"}
       </button>
     </form>
   );

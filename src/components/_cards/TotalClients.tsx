@@ -1,11 +1,12 @@
 "use client"
 import { fetchClients } from "@/app/actions/client"
-import { Package, Users } from "lucide-react"
+import {  Users } from "lucide-react"
 import { useEffect, useState } from "react"
 import DashboardCard from "./DashboardCard"
+import { client } from "@/types/interfaces"
 
 export const TotalClientsCard = () => {
-     const [data, setData] = useState<any[]>([])
+     const [data, setData] = useState<client[]>([])
         const [loading, setLoading] = useState(true)
         useEffect(() => {
             fetchClients()

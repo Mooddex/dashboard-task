@@ -4,9 +4,10 @@ import { Mail } from "lucide-react"
 import DashboardCard from "./DashboardCard"
 import { useEffect, useState } from "react"
 import { fetchClients } from "@/app/actions/client"
+import { client } from "@/types/interfaces"
 
 export default function GmailClientsCard() {
-    const [data, setData] = useState<any[]>([])
+    const [data, setData] = useState<client[]>([])
       const [loading, setLoading] = useState(true)
     
      useEffect(() => {

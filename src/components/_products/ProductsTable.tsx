@@ -15,9 +15,10 @@ import ResponsiveCard from "../_cards/ResponsiveDTCard";
 import AddProductButton from "@/components/_buttons/AddProductButton";
 import ViewReporetsButton from "../_buttons/ViewReportesButton";
 import PaginationSetup from "../main/PaginationSetUp";
+import { product } from "@/types/interfaces";
 
 export default function ProductsTable() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -93,7 +94,7 @@ export default function ProductsTable() {
               {loading ? (
                 <p className="text-center text-gray-500">Loading...</p>
               ) : (
-                <DataTable columns={columns} data={data} />
+                <DataTable columns={columns} data={data} placeHolder={"Search Your Products By Name ..."} ValueOfSelectedField={"name"} />
               )}
             </CardContent>
              <PaginationSetup />
@@ -105,7 +106,7 @@ export default function ProductsTable() {
             {loading ? (
               <p className="text-center text-gray-500">Loading...</p>
             ) : (
-              <DataTable data={data} columns={columns} />
+              <DataTable data={data} columns={columns} placeHolder={"Search Your Products By Name ..."} ValueOfSelectedField={"name"} />
             )}
           </ResponsiveCard>
         </div>

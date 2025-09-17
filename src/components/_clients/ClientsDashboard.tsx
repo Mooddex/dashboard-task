@@ -6,7 +6,7 @@ import { columns } from "@/components/_clients/clients-columns"
 import { fetchClients } from "@/app/actions/client"
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Users, Mail, Phone } from "lucide-react"
+import { Users } from "lucide-react"
 import { TotalClientsCard } from "../_cards/TotalClients"
 import ResponsiveCard from "../_cards/ResponsiveDTCard"
 import GmailClientsCard from "../_cards/GmailClientsCard"
@@ -14,11 +14,11 @@ import TotalClientsCountriesCard from "../_cards/TotalClientsCountriesCard"
 import TotalCitiesCard from "../_cards/TotalCitiesCard"
 import AddClientButton from "../_buttons/AddClientButton"
 import ViewReportesButton from "../_buttons/ViewReportesButton"
-import { Pagination } from "../ui/pagination"
 import PaginationSetup from "../main/PaginationSetUp"
+import { client } from "@/types/interfaces"
 
 export default function ClientsDashboard() {
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<client[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -81,7 +81,9 @@ export default function ClientsDashboard() {
               {loading ? (
                 <p className="text-center text-gray-500">Loading...</p>
               ) : (
-                <DataTable columns={columns} data={data} />
+                <DataTable columns={columns} data={data}
+                placeHolder={"Search Client List By Email ...."} ValueOfSelectedField={"email"} 
+                />
               
               )}
             </CardContent>
@@ -97,7 +99,7 @@ export default function ClientsDashboard() {
               <p className="text-center text-gray-500">Loading...</p>
             ): 
             (
-              <DataTable data={data} columns={columns} />
+              <DataTable data={data} columns={columns} placeHolder={"Search Client List By Email ...."} ValueOfSelectedField={"email"} />
             )}
           </ResponsiveCard>
         </div>

@@ -1,87 +1,68 @@
 "use server"
 
-import { toast } from "react-toastify"
+import { TAddClientSchema, TEditClientSchema } from "@/lib/validators"
 
-//  Get all clients
+// Get all clients
 export async function fetchClients() {
   const res = await fetch("https://api.mockae.com/fakeapi/users")
   if (!res.ok) throw new Error("Failed to load clients")
   return res.json()
-};
+}
 
 // Get client by ID
 export async function fetchClientById(id: string) {
   const res = await fetch(`https://api.mockae.com/fakeapi/users/${id}`)
   if (!res.ok) throw new Error("Failed to load client")
   return res.json()
-};
+}
 
-//Add Clients
-export async function addClientAction(formData: FormData) {
-  const newClient = {
-    username: formData.get("username"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    country: formData.get("country"),
-    city: formData.get("city"),
-  }
-
+// Add client
+export async function addClientAction(newClient: TAddClientSchema) {
   const res = await fetch("https://api.mockae.com/fakeapi/users", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newClient),
   })
 
-  if (!res.ok) throw new Error("Failed to create client")
-  return res.json()
-};
-//Edit Client
-export async function updateClientAction(id: string, formData: FormData) {
-  const updatedClient = {
-    username: formData.get("username"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    country: formData.get("country"),
-    city: formData.get("city"),
-  };
+  if (!res.ok) {
+    return { success: false, message: "Failed to create client" }
+  }
 
-  const res = await fetch(`https://api.mockae.com/fakeapi/users/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(updatedClient),
-  })
+  const data = await res.json()
+  return { success: true, data }
+ 
+}
 
-  if (!res.ok) throw new Error("Failed to update client")
-  return res.json()
-};
-
-
-// Delete client
-export async function handleDelete(id: string) {
+// Edit client
+export async function updateClientAction(id: string, updatedClient: TEditClientSchema) {
   try {
     const res = await fetch(`https://api.mockae.com/fakeapi/users/${id}`, {
-      method: "DELETE",
-    });
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedClient),
+    })
 
     if (!res.ok) {
-      toast.error(" Failed to delete client", {
-        position: "top-left",
-        autoClose: 3000,
-      });
-      return false;
+      return { success: false, message: "Failed to update client"}
     }
 
-    toast.success(" Client deleted successfully", {
-      position: "top-left",
-      autoClose: 3000,
-    });
-    return true;
+    const data = await res.json()
+    return { success: true, data }
   } catch (error) {
-    console.error("Delete error:", error);
-    toast.error(" Something went wrong", {
-      position: "top-left",
-      autoClose: 3000,
-    });
-    return false;
+    console.error("Update client error:", error)
+    return { success: false, message: "Network error occurred", error }
   }
+}
+
+// Delete client
+export async function deleteClientAction(id: string) {
+  const res = await fetch(`https://api.mockae.com/fakeapi/users/${id}`, {
+    method: "DELETE",
+  })
+
+  if (!res.ok) {
+    return { success: false, message: "Failed to delete client" }
+  }
+
+  return { success: true }
 }
